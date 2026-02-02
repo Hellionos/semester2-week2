@@ -10,10 +10,14 @@
 
 -- You can use this to test your sql before you write it into your program.
 
-SELECT COUNT(customer_id) FROM customers;
+--SELECT COUNT(customer_id) FROM customers;
+--SELECT customer_name,signup_date FROM customers WHERE 
+--signup_date=(SELECT MAX(signup_date) FROM customers) OR signup_date=(SELECT MIN(signup_date) FROM customers) ORDER BY signup_date ASC;
+SELECT COUNT(order_id), AVG(order_total), order_total FROM orders WHERE
+order_total = (SELECT MAX(order_total) FROM orders) OR order_total=(SELECT MIN(order_total) FROM orders) GROUP BY order_id;
+
 
 --## Section 1 - Summaries
-
 --1. Display the total number of customers.
 --2. Show the earliest and latest customer signup dates.
 --3. Display:
