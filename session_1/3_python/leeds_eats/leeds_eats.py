@@ -5,11 +5,19 @@ import sqlite3
 # ==================================================
 
 def total_customers(conn):
-    pass
+    query = '''
+            SELECT COUNT(customer_id) FROM customers;
+            '''
+    cursor = conn.execute(query)
+    for each in cursor:
+        print(f"\nNumber of Customers: {each[0]}\n")
 
 
 def customer_signup_range(conn):
-    pass
+    query = '''
+            SELECT 
+
+            '''
 
 
 def order_summary_stats(conn):
