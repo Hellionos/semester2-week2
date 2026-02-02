@@ -30,10 +30,12 @@
 --SELECT Members.name, loan_date, return_date, COUNT(Loans.id) FROM Members 
 --RIGHT JOIN Loans ON Members.id=Loans.member_id GROUP BY Members.name HAVING COUNT(loan_date)>0 AND COUNT(loan_date)>COUNT(return_date);
 
-
+SELECT Books.title, Loans.id CASE WHEN COUNT(Loans.id)>0 THEN 'Loaned book' ELSE 'Unloaned book' FROM Books LEFT JOIN Loans ON Books.id=book_id
 
 --10. **Books and loans report**  
---Show all books and all loans, including books that were never loaned. Include a column classifying each row as “Loaned book” or “Unloaned book.”. You will need to look up how to do this (hint: a case statement would work).
+--Show all books and all loans, including books that were never loaned. 
+--Include a column classifying each row as “Loaned book” or “Unloaned book.”. 
+--You will need to look up how to do this (hint: a case statement would work).
 
 
 --DATE('20-01-2026') /* convert a specific date to a datetime */
