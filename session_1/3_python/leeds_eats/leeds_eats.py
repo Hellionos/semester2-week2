@@ -15,18 +15,36 @@ def total_customers(conn):
 
 def customer_signup_range(conn):
     query = '''
-            SELECT 
+            SELECT customer_name,signup_date FROM customers WHERE 
+            signup_date=(SELECT MAX(signup_date) FROM customers) OR 
+            signup_date=(SELECT MIN(signup_date) 
+            FROM customers) ORDER BY signup_date ASC;
 
             '''
+    cursor = conn.execute(query)
+    for each in cursor:
+        print(f"Name: {each[0]}\tDate: {each[1]}\n")
 
 
 def order_summary_stats(conn):
-    pass
+    query = '''
+            SELECT COUNT(*) AS total_orders, ROUND(AVG(order_total),2) AS avg_order_value,
+            MAX(order_total) AS highest_order_total, 
+            MIN(order_total) AS lowest_order_total FROM orders;
+            '''
+    cursor = conn.execute(query)
+    for each in cursor:
+        print(f"Total Orders: {each[0]}\tAverage Order Value: {each[1]}\tHighest Order Total: {each[2]}\tLowest Order Total: {each[3]}\n")
 
 
 def driver_summary(conn):
-    pass
-
+    query = '''
+            SELECT COUNT(*) OVER () AS Number_of_Drivers, driver_id, 
+            hire_date FROM drivers GROUP BY driver_id;
+            '''
+    cursor = conn.execute(query)
+    for each in cursor:
+        print(f"Number of Drivers: {each[0]}\tDriver Id: {each[1]}\tHire Date: {each[2]}")
 
 # ==================================================
 # Section 2 – Key Statistics
