@@ -67,10 +67,10 @@ def section_1_menu(conn):
 def section_2_menu(conn):
     while True:
         print("\nSection 2 : Basic Analytics")
-        print("1. List all **product categories** in the database")
-        print("2. Count the **total number of customers**")
-        print("3. Show all **orders for a given customer** (ask for a specific email)")
-        print("4. Display **all products priced below £2**")
+        print("1. **total spent per customer**")
+        print("2. **orders per product category**")
+        print("3. **average number of products per order**")
+        print("4. **deliveries by status**")
         print("0. Back to main menu")
 
         choice = input("Select an option: ")
@@ -78,7 +78,7 @@ def section_2_menu(conn):
         if choice == "1":
             total_spent_per_customer(conn)
         elif choice == "2":
-            print("temp")
+            order_per_product_category(conn)
         elif choice == "3":
             print("temp")
         elif choice == "4":
@@ -137,8 +137,18 @@ def total_spent_per_customer(conn):
     cursor = conn.execute(query)
     print("\n")
     for each in cursor:
-        print(f"Name: {customer[0]} {customer[1]}, Amount: {customer[2]}")
+        print(f"Name: {each[0]} {each[1]}, Amount: £{each[2]}")
 
+def order_per_product_category(conn):
+    query = '''
+        SELECT category,COUNT(orders.order_id) FROM orders LEFT JOIN order_items ON 
+        orders.order_id=order_items.order_id LEFT JOIN products ON 
+        order_items.product_id=products.product_id GROUP BY category ORDER BY COUNT(orders.order_id) DESC;
+        '''
+    cursor = conn.execute(query)
+    print("\n")
+    for each in cursor:
+        print(f"Category: {each[0]}, Number of Orders: {each[1]}")
 
 if __name__=="__main__":
     conn = get_connection()
