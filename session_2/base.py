@@ -149,7 +149,8 @@ def order_per_product_category(conn):
     print("\n")
     for each in cursor:
         print(f"Category: {each[0]}, Number of Orders: {each[1]}")
-
+        
+        
 if __name__=="__main__":
     conn = get_connection()
     main(conn)

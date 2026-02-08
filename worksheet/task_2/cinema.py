@@ -6,7 +6,8 @@ You must NOT change the function definitions (names, arguments).
 You can run the functions you define in this file by using test.py (python test.py)
 Please do not add any additional code underneath these functions.
 """
-
+#Ethan West
+#201990893
 import sqlite3
 
 
