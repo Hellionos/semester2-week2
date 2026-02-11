@@ -23,13 +23,10 @@
 --orders.order_id=order_items.order_id LEFT JOIN products ON order_items.product_id=products.product_id
 --GROUP BY category;
 
---SELECT orders.order_id, AVG(count) FROM (SELECT COUNT(products.product_id) AS count FROM products) orders LEFT JOIN order_items ON 
---orders.order_id=order_items.order_id LEFT JOIN products ON 
---order_items.product_id=products.product_id GROUP BY orders.order_id
 
----------SELECT orders.order_id,AVG(count) FROM (SELECT COUNT(products.product_id) AS count, orders.order_id
---FROM products JOIN order_items ON order_items.product_id=products.product_id JOIN
---orders ON orders.order_id=order_items.order_id) JOIN order_items ON order_items.product_id=products.product_id
---JOIN orders ON orders.order_id=order_items.order_id;
+--SELECT ROUND(AVG(items_per_order),2) AS avg_products_per_order
+--FROM (SELECT order_id, SUM(quantity) AS items_per_order FROM order_items GROUP BY order_id) AS t;
 
+
+--7. Calculate **average number of products per order**.
 

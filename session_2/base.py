@@ -1,7 +1,8 @@
 import sqlite3
 # you will need to pip install pandas matplotlib - done
 import pandas as pd
-import matplotlib as mpl
+import matplotlib
+import matplotlib.pyplot as plt
 
 def get_connection(db_path="orders.db"):
     """
@@ -37,8 +38,6 @@ def main(conn):
             break
         else:
             print("Invalid option. Please try again.")
-
-
 
 def section_1_menu(conn):
     while True:
@@ -149,6 +148,16 @@ def order_per_product_category(conn):
     print("\n")
     for each in cursor:
         print(f"Category: {each[0]}, Number of Orders: {each[1]}")
+    df = pd.read_sql(query, conn)
+    plt.figure(figsize=(10, 6))
+    plt.bar(df["category"], df["COUNT(orders.order_id)"], color="#4C78A8")
+    plt.title("Orders per Product Category")
+    plt.xlabel("Category")
+    plt.ylabel("Number of Orders")
+    plt.xticks(rotation=45, ha="right")
+    plt.tight_layout()
+    plt.show()
+
         
         
 if __name__=="__main__":
