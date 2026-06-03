@@ -7,10 +7,7 @@
 -- 2. Load this script: .read code.sql
 -- 3. Exit SQLite: .exit
 
-
--- write your sql code here
-
---SELECT Books.title, Members.name, loan_date FROM Loans 
+--SELECT Books.title AS Title, Members.name, loan_date FROM Loans 
 --LEFT JOIN Members ON Loans.member_id=Members.id LEFT JOIN Books ON Loans.book_id=Books.id;
 
 --SELECT Books.title, loan_date, Loans.id FROM Books LEFT JOIN Loans ON Loans.book_id=Books.id ORDER BY Books.title;

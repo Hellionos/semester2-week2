@@ -10,6 +10,6 @@
 
 -- write your sql code here
 
-SELECT name, COUNT(student_id) AS TotalStudents FROM  Courses FULL OUTER JOIN StudentCourses
+SELECT name, COUNT(student_id) AS TotalStudents FROM  Courses LEFT JOIN StudentCourses
 ON Courses.id=StudentCourses.course_id GROUP BY name HAVING TotalStudents<20;
 
